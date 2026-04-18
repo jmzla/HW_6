@@ -62,3 +62,5 @@ Example validation error response:
 "title": "Title must be between 3 and 100 characters",
 "description": "Description cannot exceed 500 characters"
 }
+Video LINK :
+https://youtu.be/k67clEQrc0Q
