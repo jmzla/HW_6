@@ -14,7 +14,7 @@ This project is a Spring Boot REST API for managing tasks in a campus task board
 
 1. Clone the repository:
    ```bash
-   git clone <https://github.com/jmzla/HW_5>
+   git clone <(https://github.com/jmzla/HW_5.git)>
 2. Open the project in your IDE
 3. Make sure Java 17 or newer is installed
 4. Run the application:
