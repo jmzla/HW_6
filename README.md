@@ -162,7 +162,7 @@ GET /api/tasks/paginated?page=0&size=5&sortBy=title
 
 ## 🎥 Video Explanation
 
-(Insert your video link here)
+https://www.youtube.com/watch?v=a-YKsu4U-9Y
 
 ---
 
