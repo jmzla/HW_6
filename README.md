@@ -1,71 +1,172 @@
-# Campus Task Board API
+# TaskBoard API — Homework 6 (Spring Data JPA)
 
-## Project Description
-This project is a Spring Boot REST API for managing tasks in a campus task board. It supports creating, retrieving, updating, and deleting tasks (CRUD operations). The application also includes validation to ensure that task data meets required constraints.
+## 📌 Project Description
 
-## Technologies Used
-- Java 17+
-- Spring Boot
-- Maven
-- Lombok
-- Postman (for testing)
+This project is a RESTful API built with Spring Boot that manages tasks.
+In Homework 6, the application was upgraded to use **Spring Data JPA** with an **H2 in-memory database**, allowing tasks to be stored and queried using a real database instead of an ArrayList.
 
-## How to Run the Application
+The API supports CRUD operations, filtering, searching, and pagination.
+
+---
+
+## ⚙️ Technologies Used
+
+* Java
+* Spring Boot
+* Spring Data JPA
+* H2 Database
+* Maven
+* Lombok
+
+---
+
+## ▶️ How to Run the Project
 
 1. Clone the repository:
-   ```bash
-   git clone <(https://github.com/jmzla/HW_5.git)>
-2. Open the project in your IDE
-3. Make sure Java 17 or newer is installed
-4. Run the application:
-Right-click CampusTaskboardApplication.java
-Click Run
-5. The application will start at:
- http://localhost:8080
 
-API Endpoints
+```
+git clone https://github.com/jmzla/HW_6.git
+```
+
+2. Open in IntelliJ
+
+3. Run the main application class
+
+4. The server will start at:
+
+```
+http://localhost:8080
+```
+
+---
+
+## 🗄️ H2 Database Console
+
+Access the H2 console:
+
+```
+http://localhost:8080/h2-console
+```
+
+### Connection Settings:
+
+* JDBC URL: `jdbc:h2:mem:taskboarddb`
+* Username: `sa`
+* Password: (leave empty)
+
+---
+
+## 📡 API Endpoints
+
+### 🔹 Get All Tasks
+
+```
 GET /api/tasks
+```
 
-Returns all tasks.
+---
 
-GET /api/tasks/{id}
+### 🔹 Create Task
 
-Returns a task by ID.
-
+```
 POST /api/tasks
+```
 
-Creates a new task.
+Example Body:
 
-Example request:
+```json
 {
-"title": "Complete Homework 5",
-"description": "Finish Spring Boot API assignment",
-"completed": false,
-"priority": "HIGH"
+  "title": "Finish Homework",
+  "description": "Complete JPA assignment",
+  "completed": false,
+  "priority": "HIGH"
 }
+```
 
-PUT /api/tasks/{id}
+---
 
-Updates an existing task.
+### 🔹 Get Completed Tasks
 
-DELETE /api/tasks/{id}
+```
+GET /api/tasks/completed
+```
 
-Deletes a task.
+---
 
-Validation
-Title must not be blank
-Title must be between 3 and 100 characters
-Description must not exceed 500 characters
+### 🔹 Get Incomplete Tasks
 
-Example validation error response:
+```
+GET /api/tasks/incomplete
+```
+
+---
+
+### 🔹 Filter by Priority
+
+```
+GET /api/tasks/priority/{priority}
+```
+
+Example:
+
+```
+GET /api/tasks/priority/HIGH
+```
+
+---
+
+### 🔹 Search Tasks
+
+```
+GET /api/tasks/search?keyword=homework
+```
+
+---
+
+### 🔹 Pagination & Sorting
+
+```
+GET /api/tasks/paginated?page=0&size=5&sortBy=title
+```
+
+---
+
+## 📊 Pagination Response Example
+
+```json
 {
-"title": "Title must be between 3 and 100 characters",
-"description": "Description cannot exceed 500 characters"
+  "content": [
+    { "id": 1, "title": "Task 1" },
+    { "id": 2, "title": "Task 2" }
+  ],
+  "totalElements": 10,
+  "totalPages": 2,
+  "size": 5,
+  "number": 0,
+  "first": true,
+  "last": false
 }
+```
 
+---
 
+## 🧠 Key Concepts Learned
 
+* **JPA Entities**: Used `@Entity`, `@Id`, `@GeneratedValue`, and `@Column` to map Java objects to database tables.
+* **Repositories**: Extended `JpaRepository` to get built-in CRUD operations.
+* **Query Methods**: Used method naming conventions like `findByCompletedTrue()` to auto-generate SQL queries.
+* **Custom Queries**: Implemented search using `@Query`.
+* **Pagination**: Used `Page`, `Pageable`, and `PageRequest` for efficient data handling.
 
+---
 
-Video LINK :
-https://youtu.be/k67clEQrc0Q
+## 🎥 Video Explanation
+
+(Insert your video link here)
+
+---
+
+## ⚠️ Notes
+
+* H2 is an **in-memory database**, so data resets when the application stops.
+* `spring.jpa.hibernate.ddl-auto=update` is used for automatic schema updates.
